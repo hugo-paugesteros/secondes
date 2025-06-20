@@ -54,6 +54,9 @@ class Signal:
             y = self.y
         return display(Audio(y, rate=self.FE))
 
+    def telecharger(self, nom="test.wav"):
+        scipy.io.wavfile.write(nom, self.FE, self.y)
+
     def passe_haut(self, frequence):
         sos = scipy.signal.butter(100, frequence, "highpass", fs=self.FE, output="sos")
         self.y = scipy.signal.sosfiltfilt(sos, self.y)
